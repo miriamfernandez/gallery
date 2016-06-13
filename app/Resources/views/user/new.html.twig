@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+
+    {{ form_start(form, {'attr' : {'id' : 'user-create'}}) }}
+    {{ form_errors(form) }}
+
+    <ul>
+        <li>
+            {{ form_label(form.name) }} :
+            {{ form_errors(form.name) }}
+            {{ form_widget(form.name) }}
+        </li>
+        <li>
+            {{ form_label(form.email) }} :
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email) }}
+        </li>
+        <li>
+            {{ form_widget(form.save) }}
+        </li>
+    </ul>
+    {{ form_end(form) }}
+{% endblock %}
