@@ -14,25 +14,39 @@ use AppBundle\Entity\Item;
 use AppBundle\Form\ItemType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-class ItemsController  extends Controller
+
+class ItemController extends Controller
 {
     /**
-     * @Route("/images/", name="gallery")
+     * @Route("/items/", name="gallery")
      *
      */
-    public function showAction(Request $request)
+    public function indexAction(Request $request)
     {
-        $images = $this->getDoctrine()
-                       ->getRepository('AppBundle:Item')
-                       ->findAll();
+        $items = $this->getDoctrine()
+                      ->getRepository('AppBundle:Item')
+                      ->findAll();
 
-        return $this->render('default/galeria.html.twig', array('images' => $images));
+        return $this->render('item/index.html.twig', array('items' => $items));
     }
-    
+
     /**
-     * @Route("/addItems", name="addItems")
+     * @Route("/items/list", name="items_list")
+     *
      */
-    public function addItemsAction(Request $request)
+    public function listAction(Request $request)
+    {
+        $items = $this->getDoctrine()
+                      ->getRepository('AppBundle:Item')
+                      ->findAll();
+
+        return $this->render('item/list.html.twig', array('items' => $items));
+    }
+
+    /**
+     * @Route("/items/new", name="item_new")
+     */
+    public function newAction(Request $request)
     {
         $item = new Item();
 
@@ -60,13 +74,13 @@ class ItemsController  extends Controller
                 return $this->redirect($this->generateUrl('homepage'));
             }
         }
-        return $this->render('default/add.html.twig', array('form' => $form->createView()));
+        return $this->render('item/new.html.twig', array('form' => $form->createView()));
     }
 
     /**
-     * @Route("/updateItem/{item_id}", defaults={"item_id": 1}, name="_updateItem")
+     * @Route("/items/edit/{item_id}", defaults={"item_id": 1}, name="item_edit")
      */
-    public function updateItemAction($item_id,Request $request)
+    public function editAction($item_id, Request $request)
     {
         $item = $this->getDoctrine()
                      ->getRepository('AppBundle:Item')
@@ -98,7 +112,26 @@ class ItemsController  extends Controller
             }
         }
 
-        return $this->render('default/update.html.twig', array('form' => $form->createView()));
+        return $this->render('item/edit.html.twig', array('form' => $form->createView()));
     }
 
+    /**
+     *
+     * @Route("/items/delete/{item_id}", name="item_delete")
+     */
+    public function deleteAction($item_id)
+    {
+        $item = $this->getDoctrine()->getRepository('AppBundle:Item')->find($item_id);
+        if (!$item) {
+            throw $this->createNotFoundException('No user found for id ' . $item_id);
+        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->remove($item);
+        $em->flush();
+
+        $items = $this->getDoctrine()->getRepository('AppBundle:Item')->findAll();
+
+        return $this->render('item/list.html.twig', array('items' => $items));
+    }
 }
