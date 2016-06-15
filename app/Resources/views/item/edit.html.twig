@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+
+    <!-- Page Content -->
+    <div class="container">
+        <p>Edit image</p>
+        {{ form_start(form) }}
+        <ul>
+            <li>
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+            </li>
+            <li>
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description) }}
+            </li>
+            <li>
+                {{ form_widget(form.path) }}
+            </li>
+        </ul>
+        {{ form_widget(form.save) }}
+
+        {{ form_end(form) }}
+    </div>
+    <!-- /.container -->
+
+
+{% endblock %}
+
+
