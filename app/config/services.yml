@@ -12,3 +12,6 @@ services:
         arguments: ['%image_directory%']
    app.item_form:
         class: AppBundle\Form\ItemType
+   app.upload_image:
+        class: AppBundle\Model\UploadImage
+        arguments: [@service_container]

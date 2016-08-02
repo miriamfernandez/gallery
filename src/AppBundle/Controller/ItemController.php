@@ -15,6 +15,7 @@ use AppBundle\Form\ItemType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+
 class ItemController extends Controller
 {
     /**
@@ -55,23 +56,8 @@ class ItemController extends Controller
         if ($request->isMethod('POST')) {
             $form->submit($request);
             if ($form->isValid()) {
-
-                /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-                $file = $item->getPath();
-
-                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-
-                $file->move(
-                    $this->container->getParameter('image_directory'),
-                    $fileName
-                );
-
-                $item->setPath($fileName);
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($item);
-                $em->flush();
-
-                return $this->redirect($this->generateUrl('homepage'));
+                $this->get('app.upload_image')->upload($item);
+                return $this->redirect($this->generateUrl('items_list'));
             }
         }
         return $this->render('item/new.html.twig', array('form' => $form->createView()));
@@ -91,24 +77,8 @@ class ItemController extends Controller
         if ($request->isMethod('POST')) {
             $form->submit($request);
             if ($form->isValid()) {
-
-                /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-                $file = $item->getPath();
-
-                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-
-                $file->move(
-                    $this->container->getParameter('image_directory'),
-                    $fileName
-                );
-
-                $item->setPath($fileName);
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($item);
-                $em->flush();
-
-                return $this->redirect($this->generateUrl('homepage'));
-
+                $this->get('app.upload_image')->upload($item);
+                return $this->redirect($this->generateUrl('items_list'));
             }
         }
 
