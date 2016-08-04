@@ -15,3 +15,11 @@ services:
    app.upload_image:
         class: AppBundle\Model\UploadImage
         arguments: [@service_container]
+   app.items_listener:
+        class: AppBundle\Event\ItemsListener
+        arguments: [@logger]
+        tags:
+          - { name: monolog.logger, channel: test }
+          - { name: kernel.event_listener, event: item.create, method: onItemCreate }
+          - { name: kernel.event_listener, event: item.delete, method: onItemDelete }
+          - { name: kernel.event_listener, event: item.update, method: onItemUpdate }

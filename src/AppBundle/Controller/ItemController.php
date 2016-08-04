@@ -8,7 +8,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Event\ItemEvent;
+use AppBundle\Event\ItemsListener;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Item;
 use AppBundle\Form\ItemType;
@@ -57,6 +61,8 @@ class ItemController extends Controller
             $form->submit($request);
             if ($form->isValid()) {
                 $this->get('app.upload_image')->upload($item);
+                $this->get('event_dispatcher')->dispatch('item.create', new ItemEvent($item));
+
                 return $this->redirect($this->generateUrl('items_list'));
             }
         }
@@ -78,6 +84,8 @@ class ItemController extends Controller
             $form->submit($request);
             if ($form->isValid()) {
                 $this->get('app.upload_image')->upload($item);
+                $this->get('event_dispatcher')->dispatch('item.update', new ItemEvent($item));
+
                 return $this->redirect($this->generateUrl('items_list'));
             }
         }
@@ -98,6 +106,9 @@ class ItemController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($item);
+
+        $this->get('event_dispatcher')->dispatch('item.delete', new ItemEvent($item));
+
         $em->flush();
 
         $items = $this->getDoctrine()->getRepository('AppBundle:Item')->findAll();
