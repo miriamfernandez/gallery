@@ -2,17 +2,16 @@
 
 namespace AppBundle\Model;
 
-
 class UploadImage
 {
-    private $item;
-    private $container;
+    private   $item;
+    private   $container;
     protected $em;
 
     public function __construct($container)
     {
         $this->container = $container;
-        $this->em = $this->container->get('doctrine')->getEntityManager();
+        $this->em        = $this->container->get('doctrine')->getEntityManager();
     }
 
     public function upload($item)
@@ -31,7 +30,5 @@ class UploadImage
         $this->item->setPath($fileName);
         $this->em->persist($this->item);
         $this->em->flush();
-
     }
-    
 }

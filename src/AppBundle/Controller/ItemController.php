@@ -54,7 +54,6 @@ class ItemController extends Controller
     public function newAction(Request $request)
     {
         $item = new Item();
-
         $form = $form = $this->createForm(new ItemType(), $item);
 
         if ($request->isMethod('POST')) {
@@ -66,6 +65,7 @@ class ItemController extends Controller
                 return $this->redirect($this->generateUrl('items_list'));
             }
         }
+
         return $this->render('item/new.html.twig', array('form' => $form->createView()));
     }
 

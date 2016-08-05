@@ -33,6 +33,7 @@ class User
      * @Assert\Length(min=5)
      *
      */
+
     private $name;
 
     /**
@@ -43,6 +44,24 @@ class User
      */
     private $email;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(min=5)
+     *
+     */
+    private $password;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -99,12 +118,28 @@ class User
     {
         return $this->email;
     }
+
     /**
-     * Constructor
+     * Set name
+     *
+     * @param string $name
+     * @return User
      */
-    public function __construct()
+    public function setPassword($password)
     {
-        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     /**

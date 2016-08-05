@@ -27,33 +27,31 @@ class DefaultController extends Controller
     public function contactAction(Request $request)
     {
         $form = $this->createFormBuilder()
-            ->add('name', 'text')
-            ->add('email', 'email')
-            ->add('subject', 'text')
-            ->add('message', 'textarea')
-            ->add('save', 'submit', array('label' => 'Send'))
-            ->getForm();
+                     ->add('name', 'text')
+                     ->add('email', 'email')
+                     ->add('subject', 'text')
+                     ->add('message', 'textarea')
+                     ->add('save', 'submit', array('label' => 'Send'))
+                     ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $message = \Swift_Message::newInstance()
-                ->setSubject($form->get('subject')->getData())
-                ->setFrom($form->get('email')->getData())
-                ->setTo('mfernandez@summa.es')
-                ->setContentType("text/plain")
-                ->setBody(
-                    $form->get('message')->getData()
-                );
+                                     ->setSubject($form->get('subject')->getData())
+                                     ->setFrom($form->get('email')->getData())
+                                     ->setTo('mfernandez@summa.es')
+                                     ->setContentType("text/plain")
+                                     ->setBody(
+                                         $form->get('message')->getData()
+                                     );
 
             $this->get('mailer')->send($message);
-
             $request->getSession()->getFlashBag()->add('success', 'Your email has been sent! Thanks!');
 
             return $this->redirectToRoute('homepage');
         }
-
 
         return $this->render('default/contact.html.twig', array('form' => $form->createView()));
     }

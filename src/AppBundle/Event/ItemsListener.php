@@ -7,7 +7,7 @@ use Symfony\Bridge\Monolog\Logger;
 
 class ItemsListener
 {
-private $logger;
+    private $logger;
 
     public function __construct($logger)
     {
