@@ -7,23 +7,30 @@ security:
         in_memory:
             memory:
                users:
-                  Usuario:
+                  usuario:
                       password: usuario
                       roles: 'ROLE_USER'
                   admin:
                       password: admin
                       roles: 'ROLE_ADMIN'
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        login_firewall:
+            pattern:   ^/login$
+            anonymous: ~
         secured_area:
              pattern: ^/
              anonymous: ~
-             http_basic:
-                realm: "gallery"
+             form_login: ~
+             logout: ~
     access_control:
-        - { path: ^/users, roles: ROLE_ADMIN}
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/users, roles: ROLE_ADMIN }
+        - { path: ^/, roles: ROLE_USER }
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
