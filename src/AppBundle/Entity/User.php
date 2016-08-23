@@ -3,8 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -13,7 +15,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity
  * @UniqueEntity("email")
  */
-class User
+
+
+class User implements UserInterface
 {
     /**
      * @var integer
@@ -27,14 +31,14 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="username", type="string", length=255)
      *
      * @Assert\NotBlank()
      * @Assert\Length(min=5)
      *
      */
 
-    private $name;
+    private $username;
 
     /**
      * @var string
@@ -56,11 +60,28 @@ class User
     private $password;
 
     /**
+     * @ORM\Column(name="salt", type="string", length=40)
+     */
+    private $salt;
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
+    /**
+     * @ORM\Column(type="json_array")
+     */
+    private $roles = array();
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->isActive = true;
+        $this->salt = md5(uniqid(null, true));
     }
 
     /**
@@ -79,9 +100,9 @@ class User
      * @param string $name
      * @return User
      */
-    public function setName($name)
+    public function setUsername($username)
     {
-        $this->name = $name;
+        $this->username = $username;
 
         return $this;
     }
@@ -91,9 +112,9 @@ class User
      *
      * @return string 
      */
-    public function getName()
+    public function getUsername()
     {
-        return $this->name;
+        return $this->username;
     }
 
     /**
@@ -119,12 +140,31 @@ class User
         return $this->email;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return User
-     */
+    public function getRoles()
+    {
+        return $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+
     public function setPassword($password)
     {
         $this->password = $password;
@@ -132,11 +172,6 @@ class User
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
     public function getPassword()
     {
         return $this->password;
@@ -168,7 +203,7 @@ class User
     /**
      * Get items
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getItems()
     {

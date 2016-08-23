@@ -20,12 +20,13 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "braincrafted/bootstrap-bundle": "~2.0",
-        "doctrine/doctrine-fixtures-bundle": "dev-master",
         "twitter/bootstrap": "3.0.*",
-        "components/jquery": "1.11.1"
+        "components/jquery": "1.11.1",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "doctrine/doctrine-fixtures-bundle": "^2.3"
     },
     "scripts": {
         "post-root-package-install": [
