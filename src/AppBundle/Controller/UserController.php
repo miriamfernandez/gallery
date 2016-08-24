@@ -97,4 +97,30 @@ class UserController extends Controller
 
         return $this->render('user/index.html.twig', array('users' => $users));
     }
+
+    /**
+     * @Route("/register", name="register_new")
+     *
+     */
+    public function newRegisterAction(Request $request)
+    {
+        $user = new User();
+        $form = $this->createForm(new UserType(), $user);
+
+        if ($request->isMethod('POST')) {
+            $form->submit($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $user->setRoles(array('ROLE_USER'));
+                $user->setIsActive(true);
+                $user->setPassword(password_hash($user->getPassword(), PASSWORD_BCRYPT, array('cost' => 13)));
+                $em->persist($user);
+                $em->flush();
+
+                return $this->redirectToRoute('login');
+            }
+        }
+
+        return $this->render('user/register.html.twig', array('form' => $form->createView()));
+    }
 }

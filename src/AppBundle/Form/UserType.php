@@ -7,6 +7,7 @@
  */
 
 namespace AppBundle\Form;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,8 +17,17 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name','text', array('label' => 'Your name'))
-            ->add('email','text', array('label' => 'Your email'))
+            ->add('username', 'text', array('label' => 'Name'))
+            ->add('email', 'text', array('label' => 'email'))
+            ->add('password', 'password', array('label' => 'Password'))
+            ->add(
+                'roles', 'choice', [
+                           'choices'  => ['ROLE_ADMIN' => 'ROLE_ADMIN', 'ROLE_USER' => 'ROLE_USER'],
+                           'expanded' => true,
+                           'multiple' => true,
+                       ]
+            )
+            ->add('isActive', 'checkbox', array('label' => 'Active', 'required' => false))
             ->add('save', 'submit', array('label' => 'Guardar'))
             ->getForm();
     }
@@ -25,7 +35,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-                                   'data_class' => 'AppBundle\Entity\User',
+                                   'data_class'         => 'AppBundle\Entity\User',
                                    'cascade_validation' => true
                                ));
     }

@@ -53,7 +53,6 @@ class User implements UserInterface
      *
      * @ORM\Column(name="password", type="string", length=255)
      *
-     * @Assert\NotBlank()
      * @Assert\Length(min=5)
      *
      */
@@ -95,9 +94,9 @@ class User implements UserInterface
     }
 
     /**
-     * Set name
+     * Set username
      *
-     * @param string $name
+     * @param string $username
      * @return User
      */
     public function setUsername($username)
@@ -108,7 +107,7 @@ class User implements UserInterface
     }
 
     /**
-     * Get name
+     * Get username
      *
      * @return string 
      */
@@ -175,6 +174,29 @@ class User implements UserInterface
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 
     /**

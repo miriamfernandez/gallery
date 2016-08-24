@@ -5,12 +5,18 @@
 
     {{ form_start(form, {'attr' : {'id' : 'user-create'}}) }}
     {{ form_errors(form) }}
-
+    {{ form_row(form._token) }}
     <ul>
         <li>
             {{ form_label(form.username) }} :
             {{ form_errors(form.username) }}
             {{ form_widget(form.username) }}
+        </li>
+
+        <li>
+            {{ form_label(form.password) }} :
+            {{ form_errors(form.password) }}
+            {{ form_widget(form.password) }}
         </li>
         <li>
             {{ form_label(form.email) }} :
@@ -18,8 +24,18 @@
             {{ form_widget(form.email) }}
         </li>
         <li>
+            {{ form_label(form.roles) }} :
+            {{ form_errors(form.roles) }}
+            {{ form_widget(form.roles) }}
+        </li>
+        <li>
+            {{ form_label(form.isActive) }} :
+            {{ form_errors(form.isActive) }}
+            {{ form_widget(form.isActive) }}
+        </li>
+        <li>
             {{ form_widget(form.save) }}
         </li>
     </ul>
-    {{ form_end(form) }}
+    {{ form_end(form, {'render_rest': false}) }}
 {% endblock %}

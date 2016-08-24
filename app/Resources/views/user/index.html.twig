@@ -3,7 +3,7 @@
 {% block body %}
     {{ parent() }}
     <div class="container">
-        <a href="{{ url('user_new') }}" class="pull-right" > Add new user
+        <a href="{{ url('user_new') }}" class="pull-right"> Add new user
             <span role="button" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </a>
         <h2>Users</h2>
@@ -11,6 +11,8 @@
             <tr>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Role</th>
+                <th>Active</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -21,6 +23,14 @@
                     </td>
                     <td>
                         {{ user.email }}
+                    </td>
+                    <td>
+                        {% for rol in user.roles %}
+                            {{ rol }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {{ user.isActive }}
                     </td>
                     <td>
                         <a href="{{ url('user_edit', {'user_id': user.id}) }}">
