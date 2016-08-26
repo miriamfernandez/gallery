@@ -19,7 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class UserController extends Controller
 {
     /**
-     * @Route("/users/", name="users_list")
+     * @Route("/{_locale}/users/", name="users_list", defaults={"_locale" = "es"}, requirements={"_locale" = "en|es"})
      */
     public function listAction()
     {
@@ -29,7 +29,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/users/new", name="user_new")
+     * @Route("/{_locale}/users/new", name="user_new", defaults={"_locale" = "es"}, requirements={"_locale" = "en|es"})
      *
      */
     public function newAction(Request $request)
@@ -54,7 +54,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/users/edit/{user_id}", name="user_edit")
+     * @Route("/{_locale}/users/edit/{user_id}", name="user_edit", defaults={"_locale" = "es"}, requirements={"_locale" = "en|es"})
      */
 
     public function editAction($user_id, Request $request)
@@ -78,7 +78,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/users/delete/{user_id}",name="user_delete")
+     * @Route("/{_locale}/users/delete/{user_id}",name="user_delete", defaults={"_locale" = "es"}, requirements={"_locale" = "en|es"})
      */
 
     public function deleteAction($user_id, Request $request)
@@ -99,7 +99,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/register", name="register_new")
+     * @Route("/{_locale}/register", name="register_new", defaults={"_locale" = "es"}, requirements={"_locale" = "en|es"})
      *
      */
     public function newRegisterAction(Request $request)

@@ -13,16 +13,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/{_locale}/", name="homepage"), defaults={"_locale" = "es"}, requirements={"_locale" = "en|es"}
      */
     public function indexAction()
     {
-        $this->get('translator')->setLocale('es');
+//        $this->get('translator')->setLocale('es');
         return $this->render('default/index.html.twig', array());
     }
 
     /**
-     * @Route("/contact", name="contact")
+     * @Route("/{_locale}/contact", name="contact"), defaults={"_locale" = "es"}, requirements={"_locale" = "en|es"}
      */
 
     public function contactAction(Request $request)

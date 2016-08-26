@@ -23,7 +23,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ItemController extends Controller
 {
     /**
-     * @Route("/items/", name="gallery")
+     * @Route("/{_locale}/items/", name="gallery", defaults={"_locale" = "es"}, requirements={"_locale" = "en|es"})
      *
      */
     public function indexAction(Request $request)
@@ -36,7 +36,7 @@ class ItemController extends Controller
     }
 
     /**
-     * @Route("/items/list", name="items_list")
+     * @Route("/{_locale}/items/list", name="items_list", defaults={"_locale" = "es"}, requirements={"_locale" = "en|es"})
      *
      */
     public function listAction(Request $request)
@@ -49,7 +49,7 @@ class ItemController extends Controller
     }
 
     /**
-     * @Route("/items/new", name="item_new")
+     * @Route("/{_locale}/items/new", name="item_new", defaults={"_locale" = "es"}, requirements={"_locale" = "en|es"})
      */
     public function newAction(Request $request)
     {
@@ -70,7 +70,7 @@ class ItemController extends Controller
     }
 
     /**
-     * @Route("/items/edit/{item_id}", defaults={"item_id": 1}, name="item_edit")
+     * @Route("/{_locale}/items/edit/{item_id}", defaults={"item_id": 1, "_locale" = "es"}, name="item_edit", requirements={"_locale" = "en|es"})
      */
     public function editAction($item_id, Request $request)
     {
@@ -95,7 +95,7 @@ class ItemController extends Controller
 
     /**
      *
-     * @Route("/items/delete/{item_id}", name="item_delete")
+     * @Route("/{_locale}/items/delete/{item_id}", name="item_delete", defaults={"_locale" = "es"}, requirements={"_locale" = "en|es"})
      */
     public function deleteAction($item_id)
     {

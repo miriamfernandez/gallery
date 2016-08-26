@@ -1,58 +1,58 @@
 <?xml version="1.0" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en"  target-language="es" datatype="plaintext" original="file.ext">
+    <file source-language="en"  target-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="home">
                 <source>Home</source>
-                <target>Inicio</target>
+                <target>Home</target>
             </trans-unit>
             <trans-unit id="welcome">
                 <source>Welcome</source>
-                <target>Bienvenido</target>
+                <target>Welcome</target>
             </trans-unit>
             <trans-unit id="gallery">
                 <source>Gallery</source>
-                <target>Galeria</target>
+                <target>Gallery</target>
             </trans-unit>
             <trans-unit id="images">
                 <source>Admin images</source>
-                <target>Admin. Imágenes</target>
+                <target>Admin images</target>
             </trans-unit>
             <trans-unit id="users">
                 <source>Admin Users</source>
-                <target>Admin. Usuarios</target>
+                <target>Admin Users</target>
             </trans-unit>
             <trans-unit id="contact">
                 <source>Contact</source>
-                <target>Contacto</target>
+                <target>Contact</target>
             </trans-unit>
             <trans-unit id="image">
                 <source>Image</source>
-                <target>Imagen</target>
+                <target>Image</target>
             </trans-unit>
             <trans-unit id="name">
                 <source>Name</source>
-                <target>Nombre</target>
+                <target>Name</target>
             </trans-unit>
             <trans-unit id="description">
                 <source>Description</source>
-                <target>Descripcion</target>
+                <target>Description</target>
             </trans-unit>
             <trans-unit id="edit">
                 <source>Edit</source>
-                <target>Editar</target>
+                <target>Edit</target>
             </trans-unit>
             <trans-unit id="delete">
                 <source>Delete</source>
-                <target>Borrar</target>
+                <target>Delete</target>
             </trans-unit>
             <trans-unit id="noimage">
                 <source>No images</source>
-                <target>No hay imagenes</target>
+                <target>No images</target>
             </trans-unit>
             <trans-unit id="addnewimage">
                 <source>New image</source>
-                <target>Nueva imagen</target>
+                <target>New image</target>
             </trans-unit>
         </body>
     </file>
