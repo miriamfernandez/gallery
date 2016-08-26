@@ -17,6 +17,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $this->get('translator')->setLocale('es');
         return $this->render('default/index.html.twig', array());
     }
 

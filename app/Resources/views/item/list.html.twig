@@ -4,17 +4,17 @@
     {{ parent() }}
     <!-- /.container -->
     <div class="container">
-        <a href="{{ url('item_new') }}" class="pull-right" > Add new image
+        <a href="{{ url('item_new') }}" class="pull-right" >  {{ 'New image'|trans }}
             <span role="button" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </a>
         <h2>Items</h2>
         <table class="table table-striped">
             <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>{{ 'Image'|trans }}</th>
+                <th>{{ 'Name'|trans }}</th>
+                <th>{{ 'Description'|trans }}</th>
+                <th>{{ 'Edit'|trans }}</th>
+                <th>{{ 'Delete'|trans }}</th>
             </tr>
             {% for item in items %}
                 <tr>
